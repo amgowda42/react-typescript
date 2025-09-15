@@ -4,7 +4,8 @@ import Heading from "./components/Heading";
 import Oscar from "./components/Oscar";
 import Person from "./components/Person";
 import PersonsList from "./components/PersonsList";
-import Callapi from "./components/state/Callapi";
+// import Callapi from "./components/state/Callapi";
+import Counter from "./components/state/Counter";
 import Status from "./components/Status";
 
 function App() {
@@ -43,7 +44,8 @@ function App() {
           console.log(event, id);
         }}
       />
-      <Callapi />
+      {/* <Callapi /> */}
+      <Counter />
     </div>
   );
 }
