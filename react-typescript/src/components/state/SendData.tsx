@@ -1,11 +1,29 @@
 import { useState } from "react";
 
+type FormDataType = {
+  name: string;
+  email: string;
+};
+
 const SendData = () => {
-  const [name, setName] = useState<string>("");
-  const [email, setEmail] = useState<string>("");
+  const [formData, setFormData] = useState<FormDataType>({
+    name: "",
+    email: "",
+  });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    console.log("formData", formData);
+    alert(`formData: ${JSON.stringify(formData)}`);
+    const { name, email } = formData;
     alert(`Name: ${name}, Email: ${email}`);
     console.log(`Name: ${name}, Email: ${email}`);
   };
@@ -13,27 +31,26 @@ const SendData = () => {
     <div>
       <form onSubmit={handleSubmit}>
         <h2>Login</h2>
-
         <div>
-          <label>Email</label>
+          <label>Name</label>
           <input
             type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
             placeholder="Enter Name"
           />
         </div>
-
         <div>
           <label>Email</label>
           <input
             type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={formData.email}
+            name="email"
+            onChange={handleChange}
             placeholder="Enter your email"
           />
         </div>
-
         <button type="submit">Submit</button>
       </form>
     </div>
